@@ -1,0 +1,19 @@
+.navdesk {
+  // background-image: linear-gradient(160deg, #1ea8e7, #1ea8e7, #21aff0, #23b3f4);
+  // background: linear-gradient(270deg, hsla(179, 93%, 83%, 1) 0%, hsla(179, 86%, 75%, 1) 51%, hsla(179, 83%, 73%, 1) 100%);
+  // background: linear-gradient(180deg, hsla(190, 100%, 75%, 1) 0%, hsla(190, 100%, 75%, 1) 50%, hsla(190, 100%, 75%, 1) 100%);
+  background: hsla(206, 82%, 63%, 1);
+
+  background: linear-gradient(
+    315deg,
+    hsla(206, 82%, 63%, 1) 0%,
+    hsla(190, 90%, 51%, 1) 100%
+  );
+  border-radius: 0 0 1rem 1rem;
+  // background: rgba(255, 255, 255, 0.696);
+  color: white;
+
+  box-shadow: 1px 0px 11px -6px rgba(0, 0, 0, 0.88);
+  -webkit-box-shadow: 1px 0px 11px -6px rgba(0, 0, 0, 0.88);
+  -moz-box-shadow: 1px 0px 11px -6px rgba(0, 0, 0, 0.88);
+}
