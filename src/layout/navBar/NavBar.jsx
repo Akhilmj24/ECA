@@ -42,7 +42,7 @@ export default function NavBar() {
                   key={index}
                   type="button"
                   className="
-                   group inline-flex items-center text-base font-medium hover:text-slate-500'
+                   group inline-flex items-center text-base font-medium hover:text-slate-500' mr-5
                   "
                   onClick={() => (setFlyer(!flyer), setFlyerIndex(index))}
                 >

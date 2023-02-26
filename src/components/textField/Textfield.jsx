@@ -19,6 +19,7 @@ export default function Textfield({
   dropdownvalue,
   pattern,
   isedit,
+  defaultvalue
 }) {
   //   console.log(errors);
   //   const toy = [
@@ -39,7 +40,7 @@ export default function Textfield({
   //   console.log(list);
 
   //   const test = categoryItem?.category;
-  console.log(isedit);
+  // console.log(isedit);
   const alwaysup = { shrink: true };
   return (
     <div className="w-full">
@@ -49,15 +50,16 @@ export default function Textfield({
           id="combo-box-demo"
           options={dropdownvalue}
           fullWidth
+          // value={defaultvalue}
           //   onChange={(event, value) =>
           //     slug === "category" ? setcategoryItem(value) : null
           //   }
+          defaultValue={defaultvalue}
           size={size}
           renderInput={(params) => (
             <TextField
               {...params}
               label={label}
-              //   defaultValue="none"
               InputLabelProps={isedit ? alwaysup : null}
               {...register(slug, { required: required ? required : null })}
               error={
@@ -86,7 +88,7 @@ export default function Textfield({
           label={label}
           fullWidth
           id="outlined-size-small"
-          // defaultValue={slug}
+          defaultValue={defaultvalue}
           multiline
           rows={rowcount}
           size={size}

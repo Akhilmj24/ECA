@@ -2,6 +2,8 @@ import Login from "../../pages/auth/Login";
 import Signup from "../../pages/auth/Signup ";
 import Dashboard from "../../pages/dashBoard/Dashboard";
 import Home from "../../pages/home/Home";
+import { OrderList } from "../../pages/order/OrderList";
+import ViewOrder from "../../pages/order/ViewOrder";
 import ProductAdd from "../../pages/product/ProductAdd";
 import ProductEdit from "../../pages/product/ProductEdit";
 import ProductList from "../../pages/product/ProductList";
@@ -36,22 +38,17 @@ export const routes = [
         element: <ProductList />,
         isPrivate: true,
       },
-      // {
-      //   name: "home",
-      //   path: "/*",
-      //   element: <Home />,
-      //   isPrivate: false,
-      // },
+     
       {
-        name: "profile",
-        path: "/profile",
-        element: <Profile />,
+        name: "order",
+        path: "/orderlist",
+        element: <OrderList />,
         isPrivate: true,
       },
       {
-        name: "productlist",
-        path: "/productlist",
-        element: <ProductList />,
+        name: "view order",
+        path: "/vieworder/:id",
+        element: <ViewOrder />,
         isPrivate: true,
       },
       {

@@ -12,7 +12,7 @@ import { formatCurrency } from "../../utils/service/formatCurrency";
 export default function ProductList() {
   const [products, setProducts] = useState([]);
   const [iswait, setIswait] = useState(false);
-
+  
   useEffect(() => {
     getApi(apiPath.getproduct).then((data) => setProducts(data));
   }, [iswait]);
@@ -95,7 +95,7 @@ export default function ProductList() {
   return (
     <div className="px-10">
       <Header
-        title="ProductList"
+        title="Product List"
         tagLine="This section may also include functions to edit or delete products, as well as to add new products to the catalog. The admin panel list product section is designed to help product managers and other professionals easily manage their product"
       />
       <div className="px-5 mt-2">

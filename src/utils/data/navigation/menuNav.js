@@ -16,12 +16,24 @@ export const navgiationSubMenu = [
       },
     ],
   },
+  {
+    mainmenu: "Order Management",
+    submenu: [
+      {
+        name: "View orders",
+        tagline: "Streamline your order process with ease",
+        path: "/orderlist",
+        icon: "apps",
+      },
+      
+    ],
+  },
 ];
 
 export const navgiationSingleMenu = [
   {
-    name: "Create a product",
-    path: "/createproduct",
+    name: "Order",
+    path: "/orderlist",
   },
   {
     name: "List of product",
@@ -37,4 +49,9 @@ export const navgiationMobileMenu = [
     name: "List of product",
     path: "/listproduct",
   },
+  {
+    name: "View orders",
+    path: "/createproduct",
+  },
+  
 ];

@@ -7,5 +7,7 @@ export const apiPath = {
   createproduct: `product/createproduct`,
   getproduct: `product/`,
   getproductbyid: `product/find/`,
+  getorder: `order/`,
+  getorderbyid: `order/`,
   
 };
