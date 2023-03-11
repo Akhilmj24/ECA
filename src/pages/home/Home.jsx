@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-import { getUsers } from "../../redux/features/userSilce/userSlice";
+// import { getUsers } from "../../redux/features/userSilce/userSlice";
 import { useDispatch, useSelector } from "react-redux";
 
 export default function Home() {
@@ -7,7 +7,7 @@ export default function Home() {
   const user = useSelector((state) => state.user);
 
   useEffect(() => {
-    dispatch(getUsers());
+    // dispatch(getUsers());
   }, []);
   return (
     <div>

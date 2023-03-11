@@ -1,22 +1,22 @@
 import React, { useEffect, useState } from "react";
 import { DataTable } from "primereact/datatable";
 import { Column } from "primereact/column";
+import { useDispatch, useSelector } from "react-redux";
 import { Rating } from "primereact/rating";
-import { Tag } from "primereact/tag";
-import { ProductService } from "./ProductService";
 import Header from "../../components/header/Header";
 import { Link } from "react-router-dom";
-import { deleteApi, getApi } from "../../utils/service/axiosCall";
-import { apiPath, baseUrlImage } from "../../utils/service/api";
+import { baseUrlImage } from "../../utils/service/api";
 import { formatCurrency } from "../../utils/service/formatCurrency";
+import { getProduct, removeProduct } from "../../redux/features/productSlice";
 export default function ProductList() {
-  const [products, setProducts] = useState([]);
   const [iswait, setIswait] = useState(false);
-  
+  const dispatch = useDispatch();
+  const products = useSelector((state) => state.product.products);
   useEffect(() => {
-    getApi(apiPath.getproduct).then((data) => setProducts(data));
+    dispatch(getProduct());
   }, [iswait]);
 
+  console.log(products);
   const imageBodyTemplate = (product) => {
     return (
       <img
@@ -48,7 +48,7 @@ export default function ProductList() {
   };
   const removeProductHandler = (id) => {
     setIswait(true);
-    deleteApi(`${apiPath.getproduct}${id}`)
+    dispatch(removeProduct(id))
       .then((res) => setIswait(false))
       .catch((err) => setIswait(false));
   };

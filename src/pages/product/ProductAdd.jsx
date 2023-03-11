@@ -17,7 +17,8 @@ export default function ProductAdd() {
     formState: { errors },
   } = useForm();
   const onSubmit = (data) => {
-    if (data.orginalprice > data.saleprice) {
+    
+    if (!data.orginalprice ) {
       toast.error("Please enter saleprice lesser than orginalprice");
     } else if (addedPhotos.length === 0) {
       toast.error("Please upload images");

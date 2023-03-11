@@ -1,17 +1,35 @@
 import React, { useEffect, useState } from "react";
-
-import { useParams, useNavigate } from "react-router-dom";
-import { apiPath, baseUrlImage } from "../../utils/service/api";
-import { getApi } from "../../utils/service/axiosCall";
+import { useParams } from "react-router-dom";
+import { toast } from "react-toastify";
+import { baseUrlImage } from "../../utils/service/api";
 import { formatCurrency } from "../../utils/service/formatCurrency";
+import { useDispatch, useSelector } from "react-redux";
+import {
+  getOrderbyid,
+  updateOrderstatus,
+} from "../../redux/features/productSlice";
 
 export default function ViewOrder() {
-  const [product, setProduct] = useState([]);
+  const [isorderstatusupdate, setisorderstatusupdate] = useState(false);
   let { id } = useParams();
+  const dispatch = useDispatch();
+  const product = useSelector((state) => state.product.order);
+  const messsage = useSelector((state) => state.product.messsage);
   useEffect(() => {
-    getApi(`${apiPath.getorderbyid}${id}`).then((data) => setProduct(data));
-  }, []);
-  
+    dispatch(getOrderbyid(id));
+  }, [isorderstatusupdate]);
+
+  const orderStatus = [
+    { status: "Order Confirm" },
+    { status: "Order Canceled" },
+    { status: "Delivered" },
+  ];
+  const orderSatatusHandler = (id, status) => {
+    const query = `${id}?status=${status}`;
+    dispatch(updateOrderstatus(query))
+      .then((res) => setisorderstatusupdate(!isorderstatusupdate))
+      .then((res) => toast.success(messsage));
+  };
   return (
     <div>
       {product?.products?.map((productItems) => (
@@ -73,7 +91,23 @@ export default function ViewOrder() {
               </p>
               <p className="">
                 Order status :{" "}
-                <span className="text-lg">{product.orderstatus}</span>
+                {product.orderstatus === "Order Canceled" ? (
+                  <span className="text-lg text-red-500 font-semibold">
+                    {product.orderstatus}
+                  </span>
+                ) : product.orderstatus === "Order Confirm" ? (
+                  <span className="text-lg text-orange-500 font-semibold">
+                    {product.orderstatus}
+                  </span>
+                ) : product.orderstatus === "Delivered" ? (
+                  <span className="text-lg text-green-500 font-semibold">
+                    {product.orderstatus}
+                  </span>
+                ) : (
+                  <span className="text-lg text-blue-900 font-semibold">
+                    {product.orderstatus}
+                  </span>
+                )}
               </p>
               <p className="">
                 paymentmode :{" "}
@@ -94,6 +128,45 @@ export default function ViewOrder() {
                 </span>
               </p>
             </div>
+          </div>
+          <div>
+            <ul>
+              <li>
+                <h2 className="text-xl mb-5">Change Order Status :</h2>
+              </li>
+              {orderStatus.map(({ status, index }) => (
+                <li
+                  key={index}
+                  className={`text-lg mb-1  cursor-pointer ${
+                    product.orderstatus === status
+                      ? `text-blue-900 font-semibold`
+                      : null
+                  }`}
+                  onClick={() => orderSatatusHandler(product._id, status)}
+                >
+                  {status}
+                </li>
+              ))}
+
+              {/* <li
+                className={`text-lg mb-1  cursor-pointer ${
+                  product.orderstatus === "Order Canceled"
+                    ? `text-blue-900 font-semibold`
+                    : null
+                }`}
+              >
+                Order Canceled
+              </li>
+              <li
+                className={`text-lg mb-1  cursor-pointer ${
+                  product.orderstatus === "Delivered"
+                    ? `text-blue-900 font-semibold`
+                    : null
+                }`}
+              >
+                Delivered
+              </li> */}
+            </ul>
           </div>
         </div>
       ))}

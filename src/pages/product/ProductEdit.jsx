@@ -8,16 +8,18 @@ import { getApi, putApi } from "../../utils/service/axiosCall";
 import { useParams, useNavigate } from "react-router-dom";
 import { imageUploader } from "../../utils/service/imageUploader";
 import { apiPath, baseUrlImage } from "../../utils/service/api";
-
+import { useDispatch, useSelector } from "react-redux";
+import { getProductbyid } from "../../redux/features/productSlice";
 export default function ProductEdit() {
-  const [product, setProduct] = useState([]);
-
+  const dispatch = useDispatch();
+  const product = useSelector((state) => state.product.product);
   let { id } = useParams();
   const [addedPhotos, setAddedPhotos] = useState([]);
   const navigate = useNavigate();
   useEffect(() => {
-    getApi(`${apiPath.getproductbyid}${id}`).then((data) => setProduct(data));
+    dispatch(getProductbyid(id));
   }, []);
+
   var {
     register,
     handleSubmit,
@@ -29,11 +31,11 @@ export default function ProductEdit() {
   const onSubmit = (data) => {
     if (addedPhotos.length > 0) {
       data.images = addedPhotos;
-      putApi(data, `${apiPath.getproduct}${id}`)
+      putApi(`${apiPath.getproduct}${id}`, data)
         .then(navigate("/listproduct"))
         .catch((err) => console.log(err));
     } else {
-      putApi(data, `${apiPath.getproduct}${id}`)
+      putApi(`${apiPath.getproduct}${id}`, data)
         .then(navigate("/listproduct"))
         .catch((err) => console.log(err));
     }

@@ -4,15 +4,15 @@ const userInfo = JSON.parse(sessionStorage.getItem("user"));
 export const postApi = async (data, url) => {
   const res = await axios.post(`${baseUrl}${url}`, data, {
     headers: {
-      // access_token: userInfo?.token,
+      access_token: userInfo?.token,
     },
   });
   return res.data;
 };
-export const putApi = async (data, url) => {
+export const putApi = async (url, data) => {
   const res = await axios.put(`${baseUrl}${url}`, data, {
     headers: {
-      // access_token: userInfo?.token,
+      access_token: userInfo?.token,
     },
   });
   return res.data;
@@ -20,7 +20,7 @@ export const putApi = async (data, url) => {
 export const getApi = async (url) => {
   const res = await axios.get(`${baseUrl}${url}`, {
     headers: {
-      // access_token: userInfo?.token,
+      access_token: userInfo?.token,
     },
   });
   return res.data;
@@ -28,10 +28,8 @@ export const getApi = async (url) => {
 export const deleteApi = async (url) => {
   const res = await axios.delete(`${baseUrl}${url}`, {
     headers: {
-      // access_token: userInfo?.token,
+      access_token: userInfo?.token,
     },
   });
   return res.data;
 };
-
-

@@ -8,6 +8,7 @@ import Header from "../../components/header/Header";
 import { DataTable } from "primereact/datatable";
 import { Column } from "primereact/column";
 
+
 export const OrderList = () => {
   const [products, setProducts] = useState([]);
   const [iswait, setIswait] = useState(false);
@@ -20,8 +21,8 @@ export const OrderList = () => {
     return <p className="capitalize">{product.address.name}</p>;
   };
   const productCodeTemplate = (product) => {
-    return product.products.map((product) => (
-      <p>{product?.product.productcode}</p>
+    return product.products.map((product, index) => (
+      <p key={index}>{product?.product.productcode}</p>
     ));
   };
 
@@ -43,7 +44,6 @@ export const OrderList = () => {
       .catch((err) => setIswait(false));
   };
   const ActionBodyTemplate = (product) => {
-    // console.log(product)
     return (
       <div className="flex gap-3 text-xl">
         <Link
@@ -61,11 +61,11 @@ export const OrderList = () => {
       </div>
     );
   };
-
-  const footer = `In total there are ${
-    products ? products.length : 0
-  } products.`;
-
+ 
+  const footer = `In total there are ${products ? products.length : 0
+    } products.`;
+ 
+  
   return (
     <div className="px-10">
       <Header
@@ -76,11 +76,14 @@ export const OrderList = () => {
         <DataTable
           value={products}
           paginator
+          
           rows={5}
           rowsPerPageOptions={[5, 10, 25, 50]}
           footer={footer}
+
+
         >
-           <Column field="isPaid" header="Paid" className=""></Column>
+          <Column field="isPaid" header="Paid" className=""></Column>
           <Column header="Name" body={nameTemplate}></Column>
           <Column header="Product Codes" body={productCodeTemplate}></Column>
           <Column header="Total Amount" body={priceBodyTemplate}></Column>

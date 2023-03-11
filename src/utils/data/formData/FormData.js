@@ -114,6 +114,8 @@ export const productAddForm = [
       { label: "Red", color: "red" },
       { label: "Blue", color: "Blue" },
       { label: "Green", color: "Green" },
+      { label: "White", color: "White" },
+      { label: "Black", color: "Black" },
     ],
     
   },
@@ -133,6 +135,7 @@ export const productAddForm = [
     dropdownvalue: [
       { label: "Cotton", color: "Cotton" },
       { label: "Silk", color: "Silk" },
+      { label: "Jeans", color: "Jeans" },
     ],
     defaultvalue: "Not specified",
   },
@@ -324,9 +327,9 @@ export const productAddForm = [
     errortext: "Please enter product description",
     rowcount: 4,
     tagline:
-      "Do not exceed 150 charaters when entering the product description",
-    maxLength: 150,
-    errormaxLength: "max character is 150",
+      "Do not exceed 450 charaters when entering the product description",
+    maxLength: 450,
+    errormaxLength: "max character is 450",
     errorPattern: "",
     type: "text",
   },

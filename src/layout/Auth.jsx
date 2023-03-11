@@ -1,11 +1,11 @@
-import React from 'react'
+import React from "react";
 import { Routes, Route } from "react-router-dom";
-import { routes } from '../utils/service/Routes';
+import { routes } from "../utils/service/Routes";
 
 export default function Auth() {
   return (
     <div>
-        <Routes>
+      <Routes>
         {routes.map(
           ({ layout, pages }) =>
             layout === "auth" &&
@@ -15,5 +15,5 @@ export default function Auth() {
         )}
       </Routes>
     </div>
-  )
+  );
 }
