@@ -1,21 +1,30 @@
-import { Rating } from "@mui/material";
 import React, { useEffect, useState } from "react";
-import { apiPath, baseUrlImage } from "../../utils/service/api";
+import { apiPath } from "../../utils/service/api";
 import { deleteApi, getApi } from "../../utils/service/axiosCall";
 import { formatCurrency } from "../../utils/service/formatCurrency";
 import { Link } from "react-router-dom";
 import Header from "../../components/header/Header";
 import { DataTable } from "primereact/datatable";
 import { Column } from "primereact/column";
-
+import { InputText } from "primereact/inputtext";
+import { keywordOrderSearch } from "../../utils/service/Search";
 
 export const OrderList = () => {
   const [products, setProducts] = useState([]);
   const [iswait, setIswait] = useState(false);
-  
+  const [globalFilterValue, setGlobalFilterValue] = useState(null);
+
   useEffect(() => {
     getApi(apiPath.getorder).then((data) => setProducts(data));
   }, [iswait]);
+
+  useEffect(() => {
+    if (globalFilterValue) {
+      setProducts(keywordOrderSearch(products, globalFilterValue))
+    } else {
+      setIswait(!iswait)
+    }
+  }, [globalFilterValue])
 
   const nameTemplate = (product) => {
     return <p className="capitalize">{product.address.name}</p>;
@@ -43,6 +52,17 @@ export const OrderList = () => {
       .then((res) => setIswait(false))
       .catch((err) => setIswait(false));
   };
+
+  const renderHeader = () => {
+    return (
+      <div className="flex justify-content-end">
+        <span className="p-input-icon-left">
+          <i className="pi pi-search" />
+          <InputText value={globalFilterValue} onChange={(e) => setGlobalFilterValue(e.target.value)} placeholder="Keyword Search" />
+        </span>
+      </div>
+    );
+  };
   const ActionBodyTemplate = (product) => {
     return (
       <div className="flex gap-3 text-xl">
@@ -61,11 +81,11 @@ export const OrderList = () => {
       </div>
     );
   };
- 
+
   const footer = `In total there are ${products ? products.length : 0
     } products.`;
- 
-  
+
+  const header = renderHeader();
   return (
     <div className="px-10">
       <Header
@@ -76,12 +96,10 @@ export const OrderList = () => {
         <DataTable
           value={products}
           paginator
-          
           rows={5}
           rowsPerPageOptions={[5, 10, 25, 50]}
           footer={footer}
-
-
+          header={header}
         >
           <Column field="isPaid" header="Paid" className=""></Column>
           <Column header="Name" body={nameTemplate}></Column>
