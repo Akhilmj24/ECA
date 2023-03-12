@@ -1,6 +1,7 @@
 import axios from "axios";
 import { baseUrl } from "./api";
 const userInfo = JSON.parse(sessionStorage.getItem("user"));
+
 export const postApi = async (data, url) => {
   const res = await axios.post(`${baseUrl}${url}`, data, {
     headers: {

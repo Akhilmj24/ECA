@@ -24,6 +24,7 @@ export default function ViewOrder() {
     { status: "Order Canceled" },
     { status: "Delivered" },
   ];
+  console.log(product)
   const orderSatatusHandler = (id, status) => {
     const query = `${id}?status=${status}`;
     dispatch(updateOrderstatus(query))
@@ -78,7 +79,7 @@ export default function ViewOrder() {
                 <span className="text-lg">
                   {product.address.housenumber},{product.address.streetaddress},
                   {product.address.city},{product.address.state},
-                  {product.address.country}
+                  {product.address.country},{product.address.pincode}
                 </span>
               </p>
             </div>

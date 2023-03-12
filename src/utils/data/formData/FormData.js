@@ -116,6 +116,7 @@ export const productAddForm = [
       { label: "Green", color: "Green" },
       { label: "White", color: "White" },
       { label: "Black", color: "Black" },
+      { label: "Grey", color: "Grey" },
     ],
     
   },
